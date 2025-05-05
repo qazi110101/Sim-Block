@@ -1,0 +1,112 @@
+
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIM Block Request</title>
+  <style>
+    body {
+      font-family: 'Consolas', monospace;
+      background-color: #000000;
+      color: #00ffcc;
+      padding: 40px;
+    }
+    h1 {
+      color: #ff0033;
+      font-size: 32px;
+      text-align: center;
+      text-shadow: 0 0 5px red;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px red;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 2px solid #ff0000;
+      background-color: #222;
+      color: #00ffcc;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff0000;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: darkred;
+    }
+    .danger-box {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #1a0000;
+      color: #ff4d4d;
+      border: 2px solid red;
+      font-size: 18px;
+      animation: shake 1s infinite alternate;
+      border-radius: 10px;
+      box-shadow: 0 0 15px red;
+    }
+    @keyframes shake {
+      0% { transform: translate(0px, 0px); }
+      25% { transform: translate(-2px, 2px); }
+      50% { transform: translate(-2px, -2px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(2px, -2px); }
+    }
+  </style>
+</head>
+<body>  <h1>SIM BLOCK REQUEST PANEL</h1>
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="cnic" placeholder="CNIC Number">
+    <input type="text" id="simNumber" placeholder="SIM Number (e.g. 03001234567)">
+    <select id="network">
+      <option value="">Select Network</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Telenor">Telenor</option>
+      <option value="Zong">Zong</option>
+      <option value="Ufone">Ufone</option>
+      <option value="Warid">Warid</option>
+    </select>
+    <textarea id="reason" placeholder="Reason for Blocking SIM (Lost, Theft, etc)"></textarea>
+    <button onclick="sendBlockRequest()">Submit Request</button>
+  </div>  <div id="dangerBox" class="danger-box">
+    <strong>*** YOUR SIM BLOCK REQUEST HAS BEEN SENT ***</strong><br><br>
+    All networks will begin processing the block on your mentioned SIM.<br><br>
+    Request ID: <span id="reqId"></span><br>
+    Network: <span id="showNet"></span><br>
+    SIM: <span id="showSim"></span><br>
+    <br>
+    <strong>Status:</strong> <span style="color: lime;">ACTIVE & PROCESSING</span>
+  </div>  <script>
+    function sendBlockRequest() {
+      const reqId = Math.floor(100000 + Math.random() * 900000);
+      const sim = document.getElementById("simNumber").value;
+      const net = document.getElementById("network").value;
+
+      document.getElementById("reqId").innerText = reqId;
+      document.getElementById("showSim").innerText = sim;
+      document.getElementById("showNet").innerText = net;
+
+      const box = document.getElementById("dangerBox");
+      box.style.display = "block";
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script></body>
+</html>
